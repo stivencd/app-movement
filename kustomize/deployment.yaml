@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment-movement
+  labels:
+    app: service-movement
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-movement
+  template:
+    metadata:
+      labels:
+        app: service-movement
+    spec:
+      containers:
+      - name: app-movement
+        image: stivid007/nodejs-movement:1
+        ports:
+        - containerPort: 5005
+        env:
+        - name: NACOS_SERVERADDR
+          value: "164.90.255.230:8848"
+        - name: NACOS_NAMESPACE
+          value: "aforo255"
+        - name: NACOS_IDENTITYKEY
+          value: "nacos"
+        - name: NACOS_IDENTITYVALUE
+          value: "nacos"
+        - name: NACOS_ENV
+          value: "PROD"
